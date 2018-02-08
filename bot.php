@@ -90,20 +90,7 @@ if($message['type']=='text') {
         );
     }
 
-}else if($message['type']=='sticker')
-{	
-	$balas = array(
-							'replyToken' => $replyToken,														
-							'messages' => array(
-								array(
-										'type' => 'text',									
-										'text' => 'Makasih Kak Stikernya ^_^'										
-									
-									)
-							)
-						);
-						
-}
+
 if (isset($balas)) {
     $result = json_encode($balas);
 //$result = ob_get_clean();
