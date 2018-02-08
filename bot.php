@@ -52,6 +52,26 @@ function cuaca($keyword) {
 	$result .= $json['weather']['0']['description'];
     return $result;
 }
+function shalat($keyword) {
+    $uri = "https://time.siswadi.com/pray/" . $keyword;
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = "Jadwal Shalat Sekitar ";
+	$result .= $json['location']['address'];
+	$result .= "\nTanggal : ";
+	$result .= $json['time']['date'];
+	$result .= "\n\nShubuh : ";
+	$result .= $json['data']['Fajr'];
+	$result .= "\nDzuhur : ";
+	$result .= $json['data']['Dhuhr'];
+	$result .= "\nAshar : ";
+	$result .= $json['data']['Asr'];
+	$result .= "\nMaghrib : ";
+	$result .= $json['data']['Maghrib'];
+	$result .= "\nIsya : ";
+	$result .= $json['data']['Isha'];
+    return $result;
+}
 #-------------------------[Function]-------------------------#
 
 # require_once('./src/function/search-1.php');
@@ -74,10 +94,22 @@ if ($type == 'join' || $command == '/menu') {
     );
 }
 
-
 	    if ($command == '/cuaca') {
 
         $result = cuaca($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+if($message['type']=='text') {
+	    if ($command == '/shalat') {
+        $result = shalat($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
