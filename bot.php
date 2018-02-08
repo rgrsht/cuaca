@@ -38,7 +38,7 @@ if (count($pesan_datang) > 2) {
 
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
-    $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4","https://time.siswadi.com/pray/" . $keyword;
+    $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4";
 
     $response = Unirest\Request::get("$uri");
 
@@ -50,19 +50,6 @@ function cuaca($keyword) {
 	$result .= $json['weather']['0']['main'];
 	$result .= "\nDeskripsi : ";
 	$result .= $json['weather']['0']['description'];
-	$result .= $json['location']['address'];
-	$result .= "\nTanggal : ";
-	$result .= $json['time']['date'];
-	$result .= "\n\nShubuh : ";
-	$result .= $json['data']['Fajr'];
-	$result .= "\nDzuhur : ";
-	$result .= $json['data']['Dhuhr'];
-	$result .= "\nAshar : ";
-	$result .= $json['data']['Asr'];
-	$result .= "\nMaghrib : ";
-	$result .= $json['data']['Maghrib'];
-	$result .= "\nIsya : ";
-	$result .= $json['data']['Isha'];
     return $result;
 }
 #-------------------------[Function]-------------------------#
@@ -101,18 +88,7 @@ if ($type == 'join' || $command == '/menu') {
             )
         );
     }
-           if ($command == '/shalat') {
-        $result = shalat($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
+
 
 if (isset($balas)) {
     $result = json_encode($balas);
