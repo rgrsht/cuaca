@@ -38,7 +38,7 @@ if (count($pesan_datang) > 2) {
 
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
-    $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4";
+    $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4","https://time.siswadi.com/pray/" . $keyword;
 
     $response = Unirest\Request::get("$uri");
 
@@ -50,13 +50,6 @@ function cuaca($keyword) {
 	$result .= $json['weather']['0']['main'];
 	$result .= "\nDeskripsi : ";
 	$result .= $json['weather']['0']['description'];
-    return $result;
-}
-function shalat($keyword) {
-    $uri = "https://time.siswadi.com/pray/" . $keyword;
-    $response = Unirest\Request::get("$uri");
-    $json = json_decode($response->raw_body, true);
-    $result = "Jadwal Shalat Sekitar ";
 	$result .= $json['location']['address'];
 	$result .= "\nTanggal : ";
 	$result .= $json['time']['date'];
@@ -108,8 +101,7 @@ if ($type == 'join' || $command == '/menu') {
             )
         );
     }
-else if($message['type']=='text') {
-	    if ($command == '/shalat') {
+           if ($command == '/shalat') {
         $result = shalat($options);
         $balas = array(
             'replyToken' => $replyToken,
