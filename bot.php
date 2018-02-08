@@ -39,9 +39,7 @@ if (count($pesan_datang) > 2) {
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
     $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4";
-
     $response = Unirest\Request::get("$uri");
-
     $json = json_decode($response->raw_body, true);
     $result = "Halo Kak ^_^ Ini ada Ramalan Cuaca Untuk Daerah ";
 	$result .= $json['name'];
@@ -107,7 +105,7 @@ if ($type == 'join' || $command == '/menu') {
             )
         );
     }
-if($message['type']=='text') {
+else if($message['type']=='text') {
 	    if ($command == '/shalat') {
         $result = shalat($options);
         $balas = array(
@@ -120,7 +118,6 @@ if($message['type']=='text') {
             )
         );
     }
-
 
 if (isset($balas)) {
     $result = json_encode($balas);
