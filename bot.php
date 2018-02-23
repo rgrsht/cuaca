@@ -68,7 +68,7 @@ function shalat($keyword) {
 # require_once('./src/function/hard.php');
 //show menu, saat join dan command /menu
 if ($type == 'join' || $command == '/menu') {
-    $text = "Halo Kak ^_^\nAku Bot SANGE ONLINE VVIP\nketik /keysov untuk keyword";
+    $text = "Halo Kak ^_^\nAku Bot SANGE ONLINE VVIP\nketik help untuk keyword";
     $balas = array(
         'replyToken' => $replyToken,
         'messages' => array(
